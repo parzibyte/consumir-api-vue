@@ -25,45 +25,51 @@
             <li class="nav-item">
                 <a class="nav-link" href="create.html">New Game&nbsp;<i class="fa fa-plus-circle"></i></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="https://parzibyte.me/l/fW8zGd">Support & help&nbsp;<i
+                        class="fa fa-hands-helping"></i></a>
+            </li>
         </ul>
     </div>
 </nav>
-
 <body>
     <div id="app" class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <a href="create.html" class="btn btn-success mb-2"><i class="fa fa-plus"></i>&nbsp;New game</a>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Rate</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="game in games">
-                            <td>{{game[0]}}</td>
-                            <td>{{game[1]}}</td>
-                            <td>{{game[2]}}</td>
-                            <td>{{game[3]}}</td>
-                            <td>
-                                <button @click="edit(game)" class="btn btn-warning">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <button @click="deleteGame(game)" class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Rate</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="game in games">
+                                <td>{{game[0]}}</td>
+                                <td>{{game[1]}}</td>
+                                <td>{{game[2]}}</td>
+                                <td>{{game[3]}}</td>
+                                <td>
+                                    <button @click="edit(game)" class="btn btn-warning">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button @click="deleteGame(game)" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -78,65 +84,10 @@
     </footer>
 </body>
 
+<script src="js/menu.js"></script>
 <script src="js/vue.min.js"></script>
 <script src="js/vue-toasted.min.js"></script>
 <script src="js/sweetalert2.min.js"></script>
-<script>
-    const SERVER_URL = "https://apirestflaskpythonsqlite3.parzibyte.repl.co";
-    Vue.use(Toasted);
-    new Vue({
-        el: "#app",
-        data: () => ({
-            games: [],
-        }),
-        methods: {
-            async getGames() {
-                const url = SERVER_URL + "/games";
-                const r = await fetch(url);
-                const games = await r.json();
-                this.games = games;
-            },
-            edit(game) {
-                window.location.href = "./edit.html?id=" + game[0];
-
-            },
-            async deleteGame(game) {
-                const result = await Swal.fire({
-                    title: 'Delete',
-                    text: "Are you sure you want to delete this game?",
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#1f9bcf',
-                    cancelButtonColor: '#d9534f',
-                    cancelButtonText: 'No',
-                    confirmButtonText: 'Yes, delete it'
-                });
-                // Stop if user did not confirm
-                if (!result.value) {
-                    return;
-                }
-                const r = await fetch(SERVER_URL + "/game/" + game[0], {
-                    method: "DELETE",
-                });
-                const response = await r.json();
-                if (response) {
-                    this.$toasted.show("Deleted", {
-                        position: "top-left",
-                        duration: 1000,
-                    });
-                    await this.getGames();
-                } else {
-                    this.$toasted.show("Something went wrong. Try again", {
-                        position: "top-left",
-                        duration: 1000,
-                    });
-                }
-            }
-        },
-        async mounted() {
-            await this.getGames();
-        }
-    });
-</script>
+<script src="js/get.js"></script>
 
 </html>

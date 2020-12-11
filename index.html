@@ -1,11 +1,59 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consumo de API con Vue.js - By parzibyte - https://parzibyte.me/blog</title>
+    <title>Edit game - Consuming API with Vue</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+<nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top">
+    <a class="navbar-brand" href="https://parzibyte.me/blog">
+        <img class="img-fluid" style="max-height: 50px" src="img/parzibyte_logo.png" loading="lazy">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" id="botonMenu"
+        aria-label="Mostrar u ocultar menú">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="get.html">Games <i class="fa fa-gamepad"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="create.html">New Game&nbsp;<i class="fa fa-plus-circle"></i></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="https://parzibyte.me/l/fW8zGd">Support & help&nbsp;<i
+                        class="fa fa-hands-helping"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <body>
-    
+    <div id="app" class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1>REST API consume with Vue.js and JavaScript</h1>
+                <h2>Use the above menu to navigate</h2>
+                <a href="//parzibyte.me/blog">By Parzibyte</a>
+            </div>
+        </div>
+    </div>
+    <footer class="px-2 py-2 fixed-bottom bg-dark">
+        <span class="text-muted">REST API consume with Vue and JavaScript by
+            <a class="text-white" href="//parzibyte.me/blog">Parzibyte</a>
+            &nbsp;|&nbsp;
+            <a target="_blank" class="text-white" href="https://parzibyte.me/blog/">
+                View source
+            </a>
+        </span>
+    </footer>
+
 </body>
+<script src="js/menu.js"></script>
+
 </html>
