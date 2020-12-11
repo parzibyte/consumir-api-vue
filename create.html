@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get games - Consuming API with Vue</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app" class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h2>New game</h2>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input id="name" v-model="game.name" placeholder="Name" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input id="price" v-model="game.price" placeholder="Price" type="number" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="rate">Rate:</label>
+                    <input id="rate" v-model="game.rate" placeholder="Rate" type="number" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button @click="save()" class="btn btn-success">Save</button>
+                    &nbsp;
+                    <a href="get.html" class="btn btn-info">Go back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="js/vue.min.js"></script>
+<script>
+    const SERVER_URL = "https://apirestflaskpythonsqlite3.parzibyte.repl.co";
+    new Vue({
+        el: "#app",
+        data: () => ({
+            game: {
+                name: "",
+                price: "",
+                rate: "",
+            },
+        }),
+        methods: {
+            async save() {
+                console.log("Saving...")
+                if (!this.game.name) {
+                    return alert("Please write name");
+                }
+
+                if (!this.game.price) {
+                    return alert("Please write price");
+                }
+                if (!this.game.rate) {
+                    return alert("Please write rate");
+                }
+                const payload = JSON.stringify(this.game);
+                const url = SERVER_URL + "/game";
+                const r = await fetch(url, {
+                    method: "POST",
+                    body: payload,
+                    headers: {
+                        "Content-type": "application/json",
+                    }
+                });
+                const response = await r.json();
+                if (response) {
+                    alert("Saved!");
+                } else {
+                    alert("Something went wrong. Try again");
+                }
+            }
+        }
+    });
+</script>
+
+</html>
