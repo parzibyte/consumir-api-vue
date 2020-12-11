@@ -36,8 +36,10 @@
 </body>
 
 <script src="js/vue.min.js"></script>
+<script src="js/vue-toasted.min.js"></script>
 <script>
     const SERVER_URL = "https://apirestflaskpythonsqlite3.parzibyte.repl.co";
+    Vue.use(Toasted);
     new Vue({
         el: "#app",
         data: () => ({
@@ -49,16 +51,24 @@
         }),
         methods: {
             async save() {
-                console.log("Saving...")
                 if (!this.game.name) {
-                    return alert("Please write name");
+                    return this.$toasted.show("Please write name", {
+                        position: "top-left",
+                        duration: 1000,
+                    });
                 }
 
                 if (!this.game.price) {
-                    return alert("Please write price");
+                    return this.$toasted.show("Please write price", {
+                        position: "top-left",
+                        duration: 1000,
+                    });
                 }
                 if (!this.game.rate) {
-                    return alert("Please write rate");
+                    return this.$toasted.show("Please write rate", {
+                        position: "top-left",
+                        duration: 1000,
+                    });
                 }
                 const payload = JSON.stringify(this.game);
                 const url = SERVER_URL + "/game";
@@ -71,14 +81,20 @@
                 });
                 const response = await r.json();
                 if (response) {
-                    alert("Saved!");
+                    this.$toasted.show("Saved", {
+                        position: "top-left",
+                        duration: 1000,
+                    });
                     this.game = {
                         name: "",
                         price: null,
                         rate: null,
                     };
                 } else {
-                    alert("Something went wrong. Try again");
+                    this.$toasted.show("Something went wrong. Try again", {
+                        position: "top-left",
+                        duration: 1000,
+                    });
                 }
             }
         }
