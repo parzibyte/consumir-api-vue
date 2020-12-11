@@ -27,6 +27,9 @@ También tengo canal de YouTube: https://www.youtube.com/channel/UCroP4BTWjfM0Ck
 */
 const SERVER_URL = "https://apirestflaskpythonsqlite3.parzibyte.repl.co";
 Vue.use(Toasted);
+Vue.filter("currency", value => {
+    return "$".concat(parseFloat(value).toFixed(2));
+});
 new Vue({
     el: "#app",
     data: () => ({

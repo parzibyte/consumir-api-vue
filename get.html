@@ -81,7 +81,7 @@ También tengo canal de YouTube: https://www.youtube.com/channel/UCroP4BTWjfM0Ck
                             <tr v-for="game in games">
                                 <td>{{game[0]}}</td>
                                 <td>{{game[1]}}</td>
-                                <td>{{game[2]}}</td>
+                                <td>{{game[2] | currency}}</td>
                                 <td>{{game[3]}}</td>
                                 <td>
                                     <button @click="edit(game)" class="btn btn-warning">
