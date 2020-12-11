@@ -72,6 +72,11 @@
                 const response = await r.json();
                 if (response) {
                     alert("Saved!");
+                    this.game = {
+                        name: "",
+                        price: null,
+                        rate: null,
+                    };
                 } else {
                     alert("Something went wrong. Try again");
                 }
